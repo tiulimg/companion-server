@@ -1,7 +1,6 @@
 const Promise = require('promise')
-const User = require("../api/dbModels/User.js");
-const BlackList = require('../api/dbModels/BlackList');
-const UserService = require("../api/services/UserService.js");
+const User = require("../dbModels/User.js");
+const BlackList = require('../dbModels/BlackList');
 const JWTService = require('../services/JWTService.js');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -61,7 +60,7 @@ module.exports = function (passport) {
     
     passport.use(new LocalStrategy(
         function(username, password, done) {
-          UserService.findOne({ username: username }, function (err, user) {
+          User.findOne({ username: username }, function (err, user) {
             if (err) { return done(err); }
             if (!user) {
               return done(null, false, { message: 'Incorrect username.' });
