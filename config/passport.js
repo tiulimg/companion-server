@@ -1,7 +1,7 @@
 const Promise = require('promise')
-const User = require("./dbModels/User");
-const BlackList = require('./dbModels/BlackList');
-const JWTService = require('./services/JWTService.js');
+const User = require("../dbModels/User");
+const BlackList = require('../dbModels/BlackList');
+const JWTService = require('../services/JWTService.js');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 var LocalStrategy = require('passport-local').Strategy;
@@ -22,8 +22,8 @@ module.exports = function (passport) {
 	 * @desc use passports 'JWT' strategy
 	 */
 	let opts = {
-		jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeader(), ExtractJwt.fromUrlQueryParameter("access_token")]),
-		secretOrKey: process.env.JWTSecret
+		jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderWithScheme("jwt")]),
+		secretOrKey: process.env.JWTSecret || "empty",
 	};
 	passport.use(new JwtStrategy(opts, function (jwtPayload, done) {
 
