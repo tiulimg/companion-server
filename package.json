@@ -1,0 +1,38 @@
+{
+  "name": "companion-server",
+  "version": "1.0.0",
+  "description": "Matching young gay couples with mature couples string accompany them voluntary on a new relationship before any major problems arose in the relationship - Server Side",
+  "main": "index.js",
+  "engines": {
+    "node": "12.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiulimg/companion-server.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/tiulimg/companion-server/issues"
+  },
+  "homepage": "https://github.com/tiulimg/companion-server#readme",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "bufferutil": "^4.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "graphql-tools": "^6.2.4",
+    "http-status-codes": "^2.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "mongodb": "^3.6.2",
+    "node-gyp-build": "^4.2.3",
+    "passport": "^0.4.1",
+    "promise": "^8.1.0"
+  }
+}
