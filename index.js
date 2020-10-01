@@ -1,10 +1,8 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var { graphqlHTTP } = require('express-graphql');
-var { buildSchema } = require('graphql');
 
 // Custom modules
-var dbservices = require("./dbservices");
+var dbservices = require("./services/dbservices");
 const routes = require('./controllers/index');
 
 // Construct a schema, using GraphQL schema language
