@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Matching young gay couples with mature couples string accompany them voluntary on a new relationship before any major problems arose in the relationship - Server Side",
   "main": "index.js",
-  "engines": {
-    "node": "12.x"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
