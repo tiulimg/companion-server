@@ -9,6 +9,8 @@ const jwt = require('jsonwebtoken');
 const assert = require('assert');
 const cors = require('cors');
 
+require('../config/passport')(passport) // as strategy in ./passport.js needs passport object
+
 router.post(
   '/graphql',
   cors({
