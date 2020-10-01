@@ -1,5 +1,5 @@
 const Promise = require('promise')
-const User = require("../dbModels/User.js");
+const User = require("../dbModels/User");
 const BlackList = require('../dbModels/BlackList');
 const JWTService = require('../services/JWTService.js');
 const JwtStrategy = require('passport-jwt').Strategy;
