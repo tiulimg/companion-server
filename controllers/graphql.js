@@ -17,9 +17,10 @@ router.post(
     optionsSuccessStatus: 200
   }),
   (req, res, next) => {
+    console.log("CCC");
     passport.authenticate('jwt', { session: false }, (err, parsedJWT, info) => {
       if (err) {
-        logger.error(err);
+        console.error(err);
         return res.json(HttpStatus.UNAUTHORIZED, { errors: [err] });
       }
 
