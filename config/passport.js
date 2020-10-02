@@ -28,7 +28,6 @@ module.exports = function (passport) {
 	passport.use(new JwtStrategy(opts, function (jwtPayload, done) {
 		// Validate user
 		return Promise.try(() => {
-            console.log("AAA");
 			if (jwtPayload.sub !== "login")
 				throw HttpStatus.UNAUTHORIZED;
 		})
@@ -60,7 +59,6 @@ module.exports = function (passport) {
     
     passport.use(new LocalStrategy(
         function(username, password, done) {
-          console.log("BBB");
           User.findOne({ username: username }, function (err, user) {
             if (err) { return done(err); }
             if (!user) {

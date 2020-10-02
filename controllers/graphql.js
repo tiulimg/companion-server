@@ -17,7 +17,6 @@ router.post(
     optionsSuccessStatus: 200
   }),
   (req, res, next) => {
-    console.log("CCC");
     passport.authenticate('jwt', { session: false }, (err, parsedJWT, info) => {
       if (err) {
         console.error(err);
@@ -75,6 +74,8 @@ function makeSureOnlyLoginIsExecuted(validationContext) {
 
     let mutations = documentAst.definitions[0].selectionSet.selections || [];
     assert(mutations.length === 1, ' not executing only loginUser ');
+    console.log(mutations);
+    console.log("AAA");
     assert(
       mutations[0].name.value === 'userMutations',
       ' not executing loginUser '
@@ -84,12 +85,15 @@ function makeSureOnlyLoginIsExecuted(validationContext) {
     assert(userMutations.length <= 2, ' not executing only loginUser');
 
     if (userMutations.length === 2) {
-      if (userMutations[0].name.value === 'loginUser')
+      if (userMutations[0].name.value === 'loginUser') {
+        console.log("BBB");
         assert(
           userMutations[1].name.value === '__typename',
           'not executing loginUser'
         );
+      }
       else {
+        console.log("CCC");
         assert(
           userMutations[0].name.value === '__typename',
           'not executing loginUser'
@@ -99,11 +103,13 @@ function makeSureOnlyLoginIsExecuted(validationContext) {
           'not executing loginUser'
         );
       }
-    } else
+    } else {
+      console.log("DDD");
       assert(
         userMutations[0].name.value === 'loginUser',
         'not executing loginUser'
       );
+    }
 
     return true;
   } catch (err) {
