@@ -16,7 +16,8 @@ const { makeExecutableSchema  } = require('graphql-tools')
 
 const rootSchema = `
 	schema {
-		query: Query,
+        query: Query,
+        mutation: Mutation,
 	}
 `
 
