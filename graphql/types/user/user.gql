@@ -1,0 +1,16 @@
+# Represents a user of the system
+type User {
+  userId: String
+  firstname: String
+  lastname: String
+}
+
+type LoggedInDetails {
+  isNewUser: Boolean
+  loginToken: String
+  loggedInUser: User
+}
+
+type UserMutations {
+  loginUser: LoggedInDetails
+}
