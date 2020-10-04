@@ -5,6 +5,7 @@ const { GraphQLError } = require('graphql');
 const router = require('express').Router();
 const schema = require('../graphql/schema');
 
+const UserService = require('../services/UserService');
 const jwt = require('jsonwebtoken');
 const assert = require('assert');
 const cors = require('cors');
@@ -43,6 +44,7 @@ router.post(
       schema,
       graphiql: true,
       context: {
+        UserService,
         req,
         res
       },
