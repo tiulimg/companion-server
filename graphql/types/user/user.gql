@@ -13,4 +13,7 @@ type LoggedInDetails {
 
 type UserMutations {
   loginUser: LoggedInDetails
+  userId: String
+  firstname: String
+  lastname: String
 }
