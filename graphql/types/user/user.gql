@@ -1,8 +1,8 @@
 # Represents a user of the system
 type User {
   userId: String
-  firstname: String
-  lastname: String
+  firstName: String
+  lastName: String
 }
 
 type LoggedInDetails {
@@ -13,7 +13,4 @@ type LoggedInDetails {
 
 type UserMutations {
   loginUser: LoggedInDetails
-  userId: String
-  firstname: String
-  lastname: String
 }
