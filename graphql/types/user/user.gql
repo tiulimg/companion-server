@@ -14,5 +14,5 @@ type LoggedInDetails {
 }
 
 type UserMutations {
-  loginUser: LoggedInDetails
+  loginUser(username: String, password: String): LoggedInDetails
 }
