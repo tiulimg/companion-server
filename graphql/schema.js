@@ -1,5 +1,5 @@
 const { schema: queryRootSchema, resolvers: queryRootResolvers } = require("./query.schema");
-//const { schema: mutationRootSchema, resolvers: mutationRootResolvers } = require("./mutation.schema");
+const { schema: mutationRootSchema, resolvers: mutationRootResolvers } = require("./mutation.schema");
 //const { schema: subscriptionsRootSchema, resolvers: subscriptionsRootResolvers } = require("./subscription.schema");
 //const { schema: scalarsSchema, resolvers: scalarsResolvers} = require('./scalars/scalars.schema.js');
 //const enums_schema = require('./enums/enums.schema.js');
@@ -22,9 +22,9 @@ const rootSchema = `
 
 
 //const schema = [rootSchema, ...enums_schema, ...queryRootSchema, ...mutationRootSchema, ...subscriptionsRootSchema, ...scalarsSchema];
-const schema = [rootSchema, ...queryRootSchema];
+const schema = [rootSchema, ...queryRootSchema, ...mutationRootSchema];
 //const resolvers = merge(queryRootResolvers, mutationRootResolvers, subscriptionsRootResolvers, scalarsResolvers);
-const resolvers = merge(queryRootResolvers);
+const resolvers = merge(queryRootResolvers, mutationRootResolvers);
 
 const executableSchema = makeExecutableSchema({
 	typeDefs: schema,
