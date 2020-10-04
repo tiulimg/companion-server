@@ -74,13 +74,14 @@ function makeSureOnlyLoginIsExecuted(validationContext) {
 
     let mutations = documentAst.definitions[0].selectionSet.selections || [];
     assert(mutations.length === 1, ' not executing only loginUser ');
-    console.log(mutations);
     assert(
       mutations[0].name.value === 'userMutations',
       ' not executing loginUser '
     );
 
     let userMutations = mutations[0].selectionSet.selections || [];
+    console.log(userMutations);
+
     assert(userMutations.length <= 2, ' not executing only loginUser');
 
     if (userMutations.length === 2) {
