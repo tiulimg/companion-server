@@ -12,8 +12,8 @@ let createUserSchema = '';
 createUserSchema = `
     extend type UserMutations {
         createUser(
-            firstname: String,
-            lastname: String,
+            firstName: String,
+            lastName: String,
         ): LoggedInDetails
     }
 `;

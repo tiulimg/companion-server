@@ -9,6 +9,8 @@ type LoggedInDetails {
   isNewUser: Boolean
   loginToken: String
   loggedInUser: User
+  username: String
+  password: String
 }
 
 type UserMutations {

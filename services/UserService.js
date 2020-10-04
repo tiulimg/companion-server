@@ -1,5 +1,6 @@
 const User = require('../dbModels/User');
 const BlackList = require('../dbModels/BlackList');
+const UnauthorizedError = require('../errors/UnauthorizedError.js');
 
 module.exports = {
 

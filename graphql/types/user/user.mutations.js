@@ -7,6 +7,7 @@ module.exports = {
 	 */
 	loginUser: (source, args, {UserService, req, res}) => {
 		return new Promise((res, rej) => {
+            console.log("AAA user.mutations.js");
             return UserService.find({ username: req.param['username'], password: req.param['password'] })
                 .then(user => {
                     if (user === undefined)
