@@ -8,8 +8,9 @@ module.exports = {
 	loginUser: (source, args, {UserService, req, res}) => {
 		return new Promise((res, rej) => {
             console.log("AAA user.mutations.js");
-            console.log("args ", args);
-            return UserService.find({ username: args['username'], password: args['password'] })
+            console.log("username " + args.username);
+            console.log("password " + args.password);
+            return UserService.find({ username: args.username, password: args.password })
                 .then(user => {
                     if (user === undefined)
                         rej("Username or password are incorrect")
