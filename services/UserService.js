@@ -7,6 +7,7 @@ module.exports = {
     return checkIfBlackListed()
     .then(() => User.findOne({ username: username, password: password }))
     .then(user => {
+        console.log("BBB");
         return user;
     });
 
