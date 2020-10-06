@@ -5,11 +5,10 @@ module.exports = {
 
   find({username, password}) {
     return checkIfBlackListed()
-    .then(() => User.findOne({ username: username, password: password }))
-    .then(user => {
+    .then(() => {
         console.log("BBB");
-        return user;
-    });
+        return User.findOne({ username: username, password: password })
+    })
 
     function checkIfBlackListed() {
         return BlackList.findOne({

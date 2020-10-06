@@ -82,7 +82,6 @@ function makeSureOnlyLoginIsExecuted(validationContext) {
     );
 
     let userMutations = mutations[0].selectionSet.selections || [];
-    console.log(userMutations);
 
     assert(userMutations.length <= 2, ' not executing only loginUser');
 
