@@ -44,7 +44,4 @@ app.use((err, req, res, next) => {
 app.use(routes);
 
 // Connect to the database before starting the application server.
-dbservices.initialize(app)
-.catch(rejection => {
-    logservices.logRejection(rejection);
-});
+dbservices.initialize(app);
