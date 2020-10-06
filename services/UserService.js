@@ -1,44 +1,22 @@
 const User = require('../dbModels/User');
 const BlackList = require('../dbModels/BlackList');
-const UnauthorizedError = require('../errors/UnauthorizedError.js');
 
 module.exports = {
 
-  /**
-   * @description try to find if there exists a user to the fb profile, if not - create one
-   * @param {*} fbProfile
-   */
-  findOrCreate(fbProfile, accessToken) {
-
-    return (
-        checkIfBlackListed()
-        .then(() => User.findOne({ userId: fbProfile.id }))
-        .then(user => {
-          if (user) {
-            return user.save();
-          } else return createUser();
-        })
-    );
+  find(username, password) {
+    return checkIfBlackListed()
+    .then(() => User.findOne({ username: username, password: password }))
+    .then(user => {
+        return user;
+    });
 
     function checkIfBlackListed() {
-      return BlackList.findOne({
-        fbId: fbProfile.id
-      }).then(black => {
-        if (black) throw HttpStatus.UNAUTHORIZED;
-      });
-    }
-
-    async function createUser() {
-      let newUser = new User();
-      newUser.userId = fbProfile.id;
-      newUser.firstname = fbProfile.name.givenName;
-      newUser.lastname = fbProfile.name.familyName;
-
-      return newUser.save().then(user => {
-        user.isNew = true;
-        return user;
-      });
-    }
+        return BlackList.findOne({
+          fbId: fbProfile.id
+        }).then(black => {
+          if (black) throw HttpStatus.UNAUTHORIZED;
+        });
+      }
   },
 
   /**
