@@ -7,15 +7,16 @@ module.exports = {
     console.log("BBB UserService");
     return checkIfBlackListed()
     .then(() => {
-        console.log("BBB2 UserService");
+        console.log("BBB3 UserService");
         return User.findOne({ username: username, password: password })
     })
 
     function checkIfBlackListed() {
+        console.log("BBB1 UserService", black);
         return BlackList.findOne({
           username: username
         }).then(black => {
-          console.log("BBB1 UserService", black);
+          console.log("BBB2 UserService", black);
           if (black) throw HttpStatus.UNAUTHORIZED;
         });
       }

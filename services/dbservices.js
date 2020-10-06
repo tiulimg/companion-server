@@ -1,4 +1,4 @@
-var mongodb = require("mongodb");
+var mongodb = require("mongoose");
 var Promise = require('promise');
 
 module.exports = {
