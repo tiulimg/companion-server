@@ -14,7 +14,7 @@ module.exports = {
     })
 
     function checkIfBlackListed() {
-        console.log("BBB1 UserService", black);
+        console.log("BBB1 UserService");
         return BlackList.findOne({
           username: username
         }).then(black => {

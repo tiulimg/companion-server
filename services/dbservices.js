@@ -6,7 +6,7 @@ module.exports = {
 }
 
 function initialize(app) {
-    mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", {useNewUrlParser: true});
+    mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", {useNewUrlParser: true, useUnifiedTopology: true});
     console.log("Database connection ready");
 
     // Initialize the app.
