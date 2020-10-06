@@ -10,7 +10,9 @@ module.exports = {
             return UserService.find({ username: args.username, password: args.password })
                 .then(user => {
                     if (user === undefined || user == null)
-                        res("Username or password are incorrect")
+                        response.status(400).send({
+                            message: 'Username or password are incorrect'
+                        });
                     else
                         res({
                             isNewUser: false,
