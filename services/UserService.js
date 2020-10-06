@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const User = require('../dbModels/User');
 const BlackList = require('../dbModels/BlackList');
 
