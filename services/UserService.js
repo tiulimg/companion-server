@@ -3,7 +3,7 @@ const BlackList = require('../dbModels/BlackList');
 
 module.exports = {
 
-  find(username, password) {
+  find({username, password}) {
     return checkIfBlackListed()
     .then(() => User.findOne({ username: username, password: password }))
     .then(user => {

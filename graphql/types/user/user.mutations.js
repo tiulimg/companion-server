@@ -10,7 +10,7 @@ module.exports = {
             console.log("AAA user.mutations.js");
             console.log("username " + args.username);
             console.log("password " + args.password);
-            return UserService.find({ username: args.username, password: args.password })
+            return UserService.find(username: args.username, password: args.password)
                 .then(user => {
                     if (user === undefined)
                         rej("Username or password are incorrect")
