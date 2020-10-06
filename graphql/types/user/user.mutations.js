@@ -11,7 +11,7 @@ module.exports = {
             return UserService.find({ username: args.username, password: args.password })
                 .then(user => {
                     console.log("CCC user.mutations.js ", user);
-                    if (user === undefined)
+                    if (user === undefined || user == null)
                         rej("Username or password are incorrect")
                     else
                         res({
