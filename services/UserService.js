@@ -12,7 +12,7 @@ module.exports = {
 
     function checkIfBlackListed() {
         return BlackList.findOne({
-          fbId: fbProfile.id
+          username: username
         }).then(black => {
           if (black) throw HttpStatus.UNAUTHORIZED;
         });
