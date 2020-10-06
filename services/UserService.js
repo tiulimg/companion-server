@@ -4,9 +4,10 @@ const BlackList = require('../dbModels/BlackList');
 module.exports = {
 
   find({username, password}) {
+    console.log("BBB UserService");
     return checkIfBlackListed()
     .then(() => {
-        console.log("BBB");
+        console.log("BBB2 UserService");
         return User.findOne({ username: username, password: password })
     })
 
@@ -14,6 +15,7 @@ module.exports = {
         return BlackList.findOne({
           username: username
         }).then(black => {
+          console.log("BBB1 UserService", black);
           if (black) throw HttpStatus.UNAUTHORIZED;
         });
       }
