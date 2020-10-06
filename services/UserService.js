@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const HttpStatus = require('http-status-codes');
 
 const User = require('../dbModels/User');
 const BlackList = require('../dbModels/BlackList');
@@ -6,19 +6,15 @@ const BlackList = require('../dbModels/BlackList');
 module.exports = {
 
   find({username, password}) {
-    console.log("BBB UserService");
     return checkIfBlackListed()
     .then(() => {
-        console.log("BBB3 UserService");
         return User.findOne({ username: username, password: password })
     })
 
     function checkIfBlackListed() {
-        console.log("BBB1 UserService");
         return BlackList.findOne({
           username: username
         }).then(black => {
-          console.log("BBB2 UserService", black);
           if (black) throw HttpStatus.UNAUTHORIZED;
         });
       }

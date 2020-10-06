@@ -5,14 +5,12 @@ module.exports = {
 	/**
 	 * Create JWT for logged-in user
 	 */
-	loginUser: (source, args, {UserService, req, res}) => {
+	loginUser: (source, args, {UserService, req, response}) => {
 		return new Promise((res, rej) => {
-            console.log("AAA user.mutations.js");
             return UserService.find({ username: args.username, password: args.password })
                 .then(user => {
-                    console.log("CCC user.mutations.js ", user);
                     if (user === undefined || user == null)
-                        rej("Username or password are incorrect")
+                        res("Username or password are incorrect")
                     else
                         res({
                             isNewUser: false,
