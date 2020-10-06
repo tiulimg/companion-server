@@ -39,19 +39,19 @@ router.post(
       return next();
     })(req, res, next);
   },
-  graphqlHTTP((req, res) => {
+  graphqlHTTP((req, response) => {
     return {
       schema,
       graphiql: true,
       context: {
         UserService,
         req,
-        res
+        response
       },
       validationRules: [
         validationContext => {
           if (req.isAuthenticated()) return true;
-          else return makeSureOnlyLoginIsExecuted(validationContext, res);
+          else return makeSureOnlyLoginIsExecuted(validationContext, response);
         }
       ]
     };
