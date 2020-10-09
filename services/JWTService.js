@@ -11,12 +11,12 @@ module.exports = {
         console.log("userId, ", userId);
         console.log("jwtid, ", jwtid);
 
-
-		let id = user ? user.id : userId;
+		let id = user ? user.username : userId;
 		let payload = {};
 
 		if (id)
-			payload.user = id;
+            payload.user = id;
+            jwtid = id;
 
 		let options = {
 			expiresIn: expireTime,
