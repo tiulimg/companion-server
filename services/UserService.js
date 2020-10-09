@@ -29,6 +29,7 @@ module.exports = {
     username, 
     password
   }) {
+    User.deleteMany({}, callback)
     let newUser = new User();
     newUser.username = username;
     newUser.password = password;
