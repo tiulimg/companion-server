@@ -11,6 +11,7 @@ module.exports = {
         console.log("userId, ", userId);
         console.log("jwtid, ", jwtid);
 
+
 		let id = user ? user.id : userId;
 		let payload = {};
 
