@@ -29,7 +29,7 @@ module.exports = {
     username, 
     password
   }) {
-    User.deleteMany({}, callback)
+    User.deleteMany({});
     let newUser = new User();
     newUser.username = username;
     newUser.password = password;
