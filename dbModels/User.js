@@ -7,6 +7,6 @@ let userSchema = new mongoose.Schema({
 	password: { type: String },
 });
 userSchema.plugin(timestamps);
-UserSchema.plugin(AutoIncrement, {inc_field: 'id'});
+userSchema.plugin(AutoIncrement, {inc_field: 'id'});
 
 module.exports = mongoose.model('User', userSchema);
