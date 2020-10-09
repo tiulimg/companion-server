@@ -27,10 +27,12 @@ module.exports = {
 		return new Promise((res, rej) => {
             return UserService.registerUser({ username: args.username, password: args.password })
                 .then(user => {
-                    if (user === undefined || user == null)
+                    if (user === undefined || user == null) {
+                        console.log("Err: user is undefined");
                         response.status(500).send({
                             message: "Couldn't create user"
                         });
+                    }
                     else
                         res({
                             isNewUser: true,
@@ -39,6 +41,7 @@ module.exports = {
                         });
                 })
                 .catch(err => {
+                    console.log("Err: ", err);
                     response.status(500).send({
                         message: err
                     });
