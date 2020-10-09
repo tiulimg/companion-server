@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
+
 const timestamps = require('mongoose-timestamp');
 
 let userSchema = new mongoose.Schema({
-	username: { type: String, },
+	username: { type: String, unique: true },
 	password: { type: String },
 });
 userSchema.plugin(timestamps);
-userSchema.plugin(AutoIncrement, {inc_field: 'id'});
 
 module.exports = mongoose.model('User', userSchema);

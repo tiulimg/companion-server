@@ -7,6 +7,10 @@ Promise = require('promise');
  */
 module.exports = {
 	createJWT: function({user, userId, jwtid, expireTime, subject}) {
+        console.log("user, ", user);
+        console.log("userId, ", userId);
+        console.log("jwtid, ", jwtid);
+
 		let id = user ? user.id : userId;
 		let payload = {};
 

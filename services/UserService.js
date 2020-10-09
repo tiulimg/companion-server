@@ -29,16 +29,9 @@ module.exports = {
     username, 
     password
   }) {
-    User.deleteMany({});
-    User.collection.dropAllIndexes(function (err, results) {
-        // Handle errors
-    });
-    
     let newUser = new User();
     newUser.username = username;
     newUser.password = password;
-
-    console.log("newUser, ", newUser);
 
     return newUser.save();
   },
