@@ -1,18 +1,18 @@
 # Represents a user of the system
 type User {
   userId: String
-  firstName: String
-  lastName: String
+  username: String
+  password: String
 }
 
 type LoggedInDetails {
   isNewUser: Boolean
   loginToken: String
   loggedInUser: User
-  username: String
-  password: String
 }
 
 type UserMutations {
   loginUser(username: String, password: String): LoggedInDetails
+  registerUser(username: String, password: String): LoggedInDetails
+  resetPassword(username: String): LoggedInDetails
 }

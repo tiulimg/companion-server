@@ -3,8 +3,8 @@ const timestamps = require('mongoose-timestamp');
 
 let userSchema = new mongoose.Schema({
 	userId: { type: String, index: true, unique: true },
-	firstname: { type: String },
-	lastname: { type: String },
+	username: { type: String },
+	password: { type: String },
 });
 userSchema.plugin(timestamps);
 

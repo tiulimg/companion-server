@@ -1,38 +1,59 @@
 const HttpStatus = require('http-status-codes');
+var generator = require('generate-password');
 
 const User = require('../dbModels/User');
 const BlackList = require('../dbModels/BlackList');
+const { registerUser } = require('../graphql/types/user/user.mutations');
+
+function checkIfBlackListed(username) {
+    return BlackList.findOne({
+      username: username
+    }).then(black => {
+      if (black) throw HttpStatus.UNAUTHORIZED;
+    });
+  }
 
 module.exports = {
 
-  find({username, password}) {
-    return checkIfBlackListed()
+  loginUser({username, password}) {
+    return checkIfBlackListed(username)
     .then(() => {
         return User.findOne({ username: username, password: password })
     })
-
-    function checkIfBlackListed() {
-        return BlackList.findOne({
-          username: username
-        }).then(black => {
-          if (black) throw HttpStatus.UNAUTHORIZED;
-        });
-      }
   },
 
   /**
    * @description create a new user if no user exists for the given fbUseId
    */
-  async create({
-    userId,
-    firstname,
-    lastname,
+  async registerUser({
+    username, 
+    password
   }) {
     let newUser = new User();
-    newUser.firstname = firstname;
-    newUser.lastname = lastname;
+    newUser.username = username;
+    newUser.password = password;
 
     return newUser.save();
+  },
+
+  resetPassword({username}) {
+    return checkIfBlackListed(username)
+    .then(() => {
+        return User.findById(username).then(user => {
+            if (!user) throw ['username', 'no such user'];
+      
+            var password = generator.generate({
+                length: 12,
+                numbers: true,
+                symbols: true,
+            });
+            
+            if (password !== undefined) {
+              user.password = password;
+            }
+            return user.save();
+          });
+    })
   },
 
   /**

@@ -75,7 +75,7 @@ function makeSureOnlyLoginIsExecuted(validationContext) {
     );
 
     let mutations = documentAst.definitions[0].selectionSet.selections || [];
-    assert(mutations.length === 1, ' not executing only loginUser ');
+    assert(mutations.length === 1, ' not executing only loginUser or registerUser or resetPassword ');
     assert(
       mutations[0].name.value === 'userMutations',
       ' not executing loginUser '
@@ -83,29 +83,35 @@ function makeSureOnlyLoginIsExecuted(validationContext) {
 
     let userMutations = mutations[0].selectionSet.selections || [];
 
-    assert(userMutations.length <= 2, ' not executing only loginUser');
+    assert(userMutations.length <= 2, ' not executing only loginUser or registerUser or resetPassword');
 
     if (userMutations.length === 2) {
-      if (userMutations[0].name.value === 'loginUser') {
+      if (userMutations[0].name.value === 'loginUser' || 
+          userMutations[0].name.value === 'registerUser' || 
+          userMutations[0].name.value === 'resetPassword') {
         assert(
           userMutations[1].name.value === '__typename',
-          'not executing loginUser'
+          'not executing loginUser or registerUser or resetPassword'
         );
       }
       else {
         assert(
           userMutations[0].name.value === '__typename',
-          'not executing loginUser'
+          'not executing loginUser or registerUser or resetPassword'
         );
         assert(
-          userMutations[1].name.value === 'loginUser',
-          'not executing loginUser'
+          userMutations[0].name.value === 'loginUser' || 
+          userMutations[0].name.value === 'registerUser' || 
+          userMutations[0].name.value === 'resetPassword',
+          'not executing loginUser or registerUser or resetPassword'
         );
       }
     } else {
       assert(
-        userMutations[0].name.value === 'loginUser',
-        'not executing loginUser'
+        userMutations[0].name.value === 'loginUser' || 
+        userMutations[0].name.value === 'registerUser' || 
+        userMutations[0].name.value === 'resetPassword',
+        'not executing loginUser or registerUser or resetPassword'
       );
     }
 
