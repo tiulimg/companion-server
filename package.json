@@ -31,6 +31,7 @@
     "lodash": "^4.17.20",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.8",
+    "mongoose-sequence": "^5.2.2",
     "mongoose-timestamp": "^0.6.0",
     "node-gyp-build": "^4.2.3",
     "passport": "^0.4.1",
