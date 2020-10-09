@@ -33,6 +33,8 @@ module.exports = {
     newUser.username = username;
     newUser.password = password;
 
+    console.log("newUser, ", newUser);
+
     return newUser.save();
   },
 

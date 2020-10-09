@@ -1,6 +1,5 @@
 # Represents a user of the system
 type User {
-  userId: String
   username: String
   password: String
 }
