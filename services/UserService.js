@@ -22,6 +22,12 @@ module.exports = {
     })
   },
 
+  isUsernameInUse({username}) {
+    return User.findById(username).then(user => {
+        return !!user;
+        });
+  },
+
   /**
    * @description create a new user if no user exists for the given fbUseId
    */

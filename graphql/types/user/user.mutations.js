@@ -22,6 +22,21 @@ module.exports = {
                 })
 		})
     },
+
+    isUsernameInUse: (source, args, {UserService, req, response}) => {
+		return new Promise((res, rej) => {
+            return UserService.isUsernameInUse({ username: args.username })
+                .then(userexists => {
+                    res(userexists);
+                })
+                .catch(err => {
+                    console.log("Err: ", err);
+                    response.status(500).send({
+                        message: err
+                    });
+                })
+		})
+    },
     
     registerUser: (source, args, {UserService, req, response}) => {
 		return new Promise((res, rej) => {
@@ -42,9 +57,16 @@ module.exports = {
                 })
                 .catch(err => {
                     console.log("Err: ", err);
-                    response.status(500).send({
-                        message: err
-                    });
+                    if (err.code == "11000") {
+                        response.status(500).send({
+                            message: "Username is in use"
+                        });
+                    }
+                    else {
+                        response.status(500).send({
+                            message: err
+                        });
+                    }
                 })
 		})
     },
@@ -58,9 +80,7 @@ module.exports = {
                             message: "Couldn't reset password"
                         });
                     else
-                        res({
-                            isNewUser: false,
-                        });
+                        res(true);
                 })
                 .catch(err => {
                     response.status(500).send({

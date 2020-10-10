@@ -12,6 +12,7 @@ type LoggedInDetails {
 
 type UserMutations {
   loginUser(username: String, password: String): LoggedInDetails
+  isUsernameInUse(username: String): Boolean
   registerUser(username: String, password: String): LoggedInDetails
-  resetPassword(username: String): LoggedInDetails
+  resetPassword(username: String): Boolean
 }
