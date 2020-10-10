@@ -20,6 +20,12 @@ module.exports = {
                             loggedInUser: user
                         });
                 })
+                .catch(err => {
+                    console.log("Err: ", err);
+                    response.status(500).send({
+                        message: err
+                    });
+                })
 		})
     },
 

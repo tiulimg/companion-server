@@ -23,7 +23,7 @@ module.exports = {
   },
 
   isUsernameInUse({username}) {
-    return User.findById(username).then(user => {
+    return User.findOne({username: username}).then(user => {
         return !!user;
         });
   },
@@ -45,7 +45,7 @@ module.exports = {
   resetPassword({username}) {
     return checkIfBlackListed(username)
     .then(() => {
-        return User.findById(username).then(user => {
+        return User.findOne({username: username}).then(user => {
             console.log("BB");
             
             if (!user) throw ['username', 'no such user'];
