@@ -75,43 +75,46 @@ function makeSureOnlyLoginIsExecuted(validationContext) {
     );
 
     let mutations = documentAst.definitions[0].selectionSet.selections || [];
-    assert(mutations.length === 1, ' not executing only loginUser or registerUser or resetPassword ');
+    assert(mutations.length === 1, ' not executing only loginUser or registerUser or resetPassword or isUsernameInUse ');
     assert(
       mutations[0].name.value === 'userMutations',
-      ' not executing loginUser '
+      ' not executing loginUser or registerUser or resetPassword or isUsernameInUse '
     );
 
     let userMutations = mutations[0].selectionSet.selections || [];
 
-    assert(userMutations.length <= 2, ' not executing only loginUser or registerUser or resetPassword');
+    assert(userMutations.length <= 2, ' not executing only loginUser or registerUser or resetPassword ');
 
     if (userMutations.length === 2) {
       if (userMutations[0].name.value === 'loginUser' || 
+          userMutations[0].name.value === 'isUsernameInUse' || 
           userMutations[0].name.value === 'registerUser' || 
           userMutations[0].name.value === 'resetPassword') {
         assert(
           userMutations[1].name.value === '__typename',
-          'not executing loginUser or registerUser or resetPassword'
+          'not executing loginUser or registerUser or resetPassword or isUsernameInUse '
         );
       }
       else {
         assert(
           userMutations[0].name.value === '__typename',
-          'not executing loginUser or registerUser or resetPassword'
+          'not executing loginUser or registerUser or resetPassword or isUsernameInUse '
         );
         assert(
           userMutations[0].name.value === 'loginUser' || 
+          userMutations[0].name.value === 'isUsernameInUse' || 
           userMutations[0].name.value === 'registerUser' || 
           userMutations[0].name.value === 'resetPassword',
-          'not executing loginUser or registerUser or resetPassword'
+          'not executing loginUser or registerUser or resetPassword or isUsernameInUse '
         );
       }
     } else {
       assert(
         userMutations[0].name.value === 'loginUser' || 
-        userMutations[0].name.value === 'registerUser' || 
+          userMutations[0].name.value === 'isUsernameInUse' || 
+          userMutations[0].name.value === 'registerUser' || 
         userMutations[0].name.value === 'resetPassword',
-        'not executing loginUser or registerUser or resetPassword'
+        'not executing loginUser or registerUser or resetPassword or isUsernameInUse '
       );
     }
 
