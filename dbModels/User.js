@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const timestamps = require('mongoose-timestamp');
+var bcrypt = require('bcrypt');
 
-var bcrypt = require('bcrypt'),
 var SALT_WORK_FACTOR = 10;
 
 let userSchema = new mongoose.Schema({
