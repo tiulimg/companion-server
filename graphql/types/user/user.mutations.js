@@ -72,9 +72,12 @@ module.exports = {
     },
     
     resetPassword: (source, args, {UserService, req, response}) => {
+        console.log("AA");
 		return new Promise((res, rej) => {
             return UserService.resetPassword({ username: args.username })
                 .then(user => {
+                    console.log("AA1");
+                    
                     if (user === undefined || user == null)
                         response.status(500).send({
                             message: "Couldn't reset password"

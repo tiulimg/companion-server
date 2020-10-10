@@ -46,17 +46,22 @@ module.exports = {
     return checkIfBlackListed(username)
     .then(() => {
         return User.findById(username).then(user => {
+            console.log("BB");
+            
             if (!user) throw ['username', 'no such user'];
+            console.log("BB1");
       
             var password = generator.generate({
                 length: 12,
                 numbers: true,
                 symbols: true,
             });
+            console.log("BB2 " + password);
             
             if (password !== undefined) {
               user.password = password;
             }
+            console.log("BB3");
             return user.save();
           });
     })
