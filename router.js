@@ -25,15 +25,19 @@ router.post("/api/couples", function(req, res) {
     var couple = match.parsecouple(req.body);
     dbservices.insertcouple(res, couple)
     .then(() => {
+        console.log(`b4matches`);
         match.getbestmatch(res, couple)
         .then(bestmatches => {
+            console.log(`have matches ${bestmatches}`);
             if (bestmatches.youngcouple && bestmatches.maturecouple) {
+                console.log(`have young mature`);
                 youngcouple = bestmatches.youngcouple;
                 maturecouple = bestmatches.maturecouple;
                 mail.emailyoung(
                     youngcouple.email, maturecouple.email, youngcouple.name1, youngcouple.name2, maturecouple.name1, maturecouple.name2);
                 mail.emailmature(
                     maturecouple.email, youngcouple.email, youngcouple.name1, youngcouple.name2, maturecouple.name1, maturecouple.name2);
+                console.log(`emailed`);
                 dbservices.deleteonecouple(res, youngcouple.email)
                 .then(() => {
                     res.status(200).json("OK");

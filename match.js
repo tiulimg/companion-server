@@ -72,12 +72,17 @@ function getbestmatch(res, couple) {
             delete copycouple.name2;
             delete copycouple.gender;
             delete copycouple.notes;
+            coupleeachvalue = {};
+            for (var property in copycouple) {
+                coupleeachvalue[property] = JSON.parse(copycouple[property]);
+            }
 
             for (let iCouple = 0; iCouple < couples.length; iCouple++) {
                 var score = 0;
                 const currcouple = couples[iCouple];
                 currcoupleeachvalue = {};
-                for (var property in copycouple) {
+                for (var property in coupleeachvalue) {
+                    currcoupleeachvalue[property] = JSON.parse(coupleeachvalue[property]);
                     console.log(`property: ${property} currcoupleeachvalue: ${currcoupleeachvalue[property]}`);
 
                     const filteredArray = 
