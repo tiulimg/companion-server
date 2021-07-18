@@ -1,0 +1,22 @@
+{
+  "name": "companion-server",
+  "version": "1.0.0",
+  "description": "Match new couples with old couples to companion the start of thier relationship",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiulimg/companion-server.git"
+  },
+  "author": "tiulimg@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tiulimg/companion-server/issues"
+  },
+  "homepage": "https://github.com/tiulimg/companion-server#readme",
+  "dependencies": {
+    "mongodb": "^4.0.0"
+  }
+}
