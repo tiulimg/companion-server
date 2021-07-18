@@ -21,8 +21,7 @@ function emailyoung(recipient, matureemail, youngname1, youngname2, maturename1,
 
     var data = {
         from: 'Companion - ליווי זוגי בתחילת הקשר <tiulimg@gmail.com>',
-        //to: recipient,
-        to: "tiulimg@gmail.com",
+        to: recipient,
         subject: subject,
         text: mailbody,
     };
@@ -51,8 +50,7 @@ function emailmature(recipient, youngemail, youngname1, youngname2, maturename1,
 
     var data = {
         from: 'Companion - ליווי זוגי בתחילת הקשר <tiulimg@gmail.com>',
-        //to: recipient,
-        to: "tiulimg@gmail.com",
+        to: recipient,
         subject: subject,
         text: mailbody,
     };
