@@ -9,7 +9,6 @@ module.exports = {
     insertcouple: insertcouple,
     deleteonecouple: deleteonecouple,
     deleteallcouples: deleteallcouples,
-    getmatches: getmatches,
 }
 
 var db;
@@ -40,25 +39,18 @@ function initialize(app) {
     });
 }
 
-function getcouples(res) {
+function getcouples(res, youngormature = null, gender = null) {
     return new Promise((resolve, reject) => {
-        db.collection(COUPLES_COLLECTION).find({}).toArray(function(err, docs) {
+        var filter = [];
+        if (youngormature) {
+            filter.push({ $not: {youngormature: youngormature} });
+        }
+        if (gender) {
+            filter.push({gender: gender});
+        }
+        db.collection(COUPLES_COLLECTION).find({$and: filter}).toArray(function(err, docs) {
             if (err) {
                 logservices.handleError(res, err.message, "Failed to get couples.");
-            } else {
-                return resolve(docs);
-            }
-        });
-    });
-}
-
-function getcouple(res, email) {
-    return new Promise((resolve, reject) => {
-        var filter = {};
-        filter.email = email;
-        db.collection(COUPLES_COLLECTION).find(filter).toArray(function(err, docs) {
-            if (err) {
-                logservices.handleError(res, err.message, "Failed to get couple.");
             } else {
                 return resolve(docs);
             }
@@ -102,19 +94,6 @@ function deleteallcouples(res) {
         db.collection(COUPLES_COLLECTION).deleteMany({}, function(err, docs) {
             if (err) {
                 logservices.handleError(res, err.message, "Failed to delete all couples.");
-            } else {
-                return resolve();
-            }
-        });
-    });
-}
-
-function getmatches(res, filters) {
-    return new Promise((resolve, reject) => {
-        var filter = {}
-        db.collection(COUPLES_COLLECTION).find(filter, function(err, docs) {
-            if (err) {
-                logservices.handleError(res, err.message, "Failed to get matches.");
             } else {
                 return resolve();
             }
