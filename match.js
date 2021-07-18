@@ -1,6 +1,7 @@
 var Promise = require('promise');
 
 var dbservices = require("./dbservices");
+var logservices = require("./logservices");
 
 module.exports = {
     parsecouple: parsecouple,
@@ -60,8 +61,11 @@ function parsecouple(body) {
 
 function getbestmatch(res, couple) {
     return new Promise((resolve, reject) => {
+        console.log(`enter getbestmatch`);
         dbservices.getcouples(res, couple.youngormature, couple.gender)
         .then(couples => {
+            console.log(`couples to match: ${JSON.stringify(couples)}`);
+
             bestmatch = null;
             bestmatchscore = -1;
             copycouple = JSON.parse(JSON.stringify(couple));
@@ -76,6 +80,7 @@ function getbestmatch(res, couple) {
             for (var property in copycouple) {
                 coupleeachvalue[property] = JSON.parse(copycouple[property]);
             }
+            console.log(`coupleeachvalue: ${JSON.stringify(coupleeachvalue)}`);
 
             for (let iCouple = 0; iCouple < couples.length; iCouple++) {
                 var score = 0;
