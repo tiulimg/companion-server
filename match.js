@@ -76,8 +76,10 @@ function getbestmatch(res, couple) {
             delete copycouple.name2;
             delete copycouple.gender;
             delete copycouple.notes;
+            delete copycouple._id;
             coupleeachvalue = {};
             for (var property in copycouple) {
+                console.log(`property: ${property} value: ${copycouple[property]}`);
                 coupleeachvalue[property] = JSON.parse(copycouple[property]);
             }
             console.log(`coupleeachvalue: ${JSON.stringify(coupleeachvalue)}`);
@@ -87,6 +89,7 @@ function getbestmatch(res, couple) {
                 const currcouple = couples[iCouple];
                 currcoupleeachvalue = {};
                 for (var property in coupleeachvalue) {
+                    console.log(`property: ${property} value: ${coupleeachvalue[property]}`);
                     currcoupleeachvalue[property] = JSON.parse(coupleeachvalue[property]);
                     console.log(`property: ${property} currcoupleeachvalue: ${currcoupleeachvalue[property]}`);
 
