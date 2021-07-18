@@ -52,15 +52,35 @@ function getcouples(res) {
     });
 }
 
+function getcouple(res, email) {
+    return new Promise((resolve, reject) => {
+        var filter = {};
+        filter.email = email;
+        db.collection(COUPLES_COLLECTION).find(filter).toArray(function(err, docs) {
+            if (err) {
+                logservices.handleError(res, err.message, "Failed to get couple.");
+            } else {
+                return resolve(docs);
+            }
+        });
+    });
+}
+
 function insertcouple(res, couple) {
     return new Promise((resolve, reject) => {
-        db.collection(COUPLES_COLLECTION).insertOne(couple, function(err, doc) {
-            if (err) {
-                logservices.handleError(res, err.message, "Failed to create new couple.");
-            }
-            else {
-                return resolve();
-            }
+        deleteonecouple(res, couple.email)
+        .then(() => {
+            db.collection(COUPLES_COLLECTION).insertOne(couple, function(err, doc) {
+                if (err) {
+                    logservices.handleError(res, err.message, "Failed to create or update couple.");
+                }
+                else {
+                    return resolve(doc);
+                }
+            });
+        })
+        .catch(rejection => {
+            logservices.logRejection(rejection);
         });
     });
 }
