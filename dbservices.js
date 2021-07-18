@@ -43,7 +43,7 @@ function getcouples(res, youngormature = null, gender = null) {
     return new Promise((resolve, reject) => {
         var filter = [];
         if (youngormature) {
-            filter.push({ $not: {youngormature: youngormature} });
+            filter.push({youngormature: { $not: {$regex: `${youngormature}`} } });
         }
         if (gender) {
             filter.push({gender: gender});

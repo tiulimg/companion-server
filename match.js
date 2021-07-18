@@ -23,6 +23,7 @@ var formParams = {
     "ארון":"closet",
     "רמת מיניות":"sexuality",
     "לקויות":"disability",
+    "הערות":"notes",
 };
 
 formValues = {
@@ -62,26 +63,22 @@ function getbestmatch(res, couple) {
         dbservices.getcouples(res, couple.youngormature, couple.gender)
         .then(couples => {
             bestmatch = null;
-            bestmatchscore = 0;
+            bestmatchscore = -1;
             copycouple = JSON.parse(JSON.stringify(couple));
             delete copycouple.email;
             delete copycouple.editlink;
             delete copycouple.youngormature;
             delete copycouple.name1;
             delete copycouple.name2;
-            coupleeachvalue = {};
-            for (var property in copycouple) {
-                coupleeachvalue[property] = copycouple.split(", "); 
-            }
-            console.log("coupleeachvalue: " + JSON.stringify(coupleeachvalue));
+            delete copycouple.gender;
+            delete copycouple.notes;
 
             for (let iCouple = 0; iCouple < couples.length; iCouple++) {
                 var score = 0;
                 const currcouple = couples[iCouple];
                 currcoupleeachvalue = {};
                 for (var property in copycouple) {
-                    currcoupleeachvalue[property] = copycouple.split(", ");
-                    console.log(`property: ${property} currcoupleeachvalue: currcoupleeachvalue[property]`);
+                    console.log(`property: ${property} currcoupleeachvalue: ${currcoupleeachvalue[property]}`);
 
                     const filteredArray = 
                         coupleeachvalue[property].filter(value => 
