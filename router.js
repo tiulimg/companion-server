@@ -42,6 +42,9 @@ router.post("/api/couples", function(req, res) {
                     logservices.logRejection(rejection);
                 });                   
             }
+            else {
+                res.status(200).json("OK");
+            }
         })
         .catch(rejection => {
             logservices.logRejection(rejection);
