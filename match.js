@@ -89,8 +89,8 @@ function getbestmatch(res, couple) {
                 const currcouple = couples[iCouple];
                 currcoupleeachvalue = {};
                 for (var property in coupleeachvalue) {
-                    console.log(`property: ${property} currcoupleeachvalue: ${coupleeachvalue[property]}`);
-                    currcoupleeachvalue[property] = coupleeachvalue[property];
+                    console.log(`property: ${property} currcoupleeachvalue: ${currcouple[property]}`);
+                    currcoupleeachvalue[property] = currcouple[property];
 
                     const filteredArray = 
                         coupleeachvalue[property].filter(value => 
