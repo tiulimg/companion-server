@@ -4,9 +4,8 @@ module.exports = {
 }
 
 function emailyoung(recipient, matureemail, youngname1, youngname2, maturename1, maturename2) {
-    var api_key = process.env.MAILGUN_API_KEY;
-    var DOMAIN = process.env.MAILGUN_DOMAIN;
-    var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+    const sgMail = require('@sendgrid/mail')
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
     var mailbody = `היי ${youngname1} ו-${youngname2} 🙂 מה שלומכם?
     
@@ -28,15 +27,19 @@ function emailyoung(recipient, matureemail, youngname1, youngname2, maturename1,
         text: mailbody,
     };
 
-    mailgun.messages().send(data, function (error, body) {
-        console.log(body);
-    });
+    sgMail
+    .send(data)
+    .then(() => {
+        console.log('Email sent')
+    })
+    .catch((error) => {
+        console.error(error)
+    })
 }
 
 function emailmature(recipient, youngemail, youngname1, youngname2, maturename1, maturename2) {
-    var api_key = process.env.MAILGUN_API_KEY;
-    var DOMAIN = process.env.MAILGUN_DOMAIN;
-    var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+    const sgMail = require('@sendgrid/mail')
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
     var mailbody = `היי ${maturename1} ו-${maturename2} 🙂 מה שלומכם?
     
@@ -57,7 +60,12 @@ function emailmature(recipient, youngemail, youngname1, youngname2, maturename1,
         text: mailbody,
     };
 
-    mailgun.messages().send(data, function (error, body) {
-        console.log(body);
-    });
+    sgMail
+    .send(data)
+    .then(() => {
+        console.log('Email sent')
+    })
+    .catch((error) => {
+        console.error(error)
+    })
 }
