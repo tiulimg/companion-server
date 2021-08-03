@@ -104,39 +104,41 @@ function getbestmatch(res, couple) {
 
             bestmatch = null;
             bestmatchscore = -1;
-            copycouple = JSON.parse(JSON.stringify(couple));
-            delete copycouple.email;
-            delete copycouple.editlink;
-            delete copycouple.youngormature;
-            delete copycouple.name1;
-            delete copycouple.name2;
-            delete copycouple.gender;
-            delete copycouple.notes;
-            delete copycouple._id;
-            coupleeachvalue = {};
-            for (var property in copycouple) {
-                console.log(`property: ${property} value: ${copycouple[property]}`);
-                coupleeachvalue[property] = JSON.parse(copycouple[property]);
-            }
-            console.log(`coupleeachvalue: ${JSON.stringify(coupleeachvalue)}`);
+            delete couple.email;
+            delete couple.editlink;
+            delete couple.youngormature;
+            delete couple.name1;
+            delete couple.name2;
+            delete couple.gender;
+            delete couple.notes;
+            delete couple._id;
 
             for (let iCouple = 0; iCouple < couples.length; iCouple++) {
                 var score = 0;
                 const currcouple = couples[iCouple];
-                currcoupleeachvalue = {};
-                for (var property in coupleeachvalue) {
-                    console.log(`property: ${property} currcoupleeachvalue: ${currcouple[property]}`);
-                    currcoupleeachvalue[property] = currcouple[property];
+                var skip = false;
+                for (var property in currcouple) {
+                    console.log(`property: ${property} currcouple: ${currcouple[property]}`);
 
-                    const filteredArray = 
-                        coupleeachvalue[property].filter(value => 
-                            currcoupleeachvalue[property].includes(value));
-                    console.log("filteredArray: " + JSON.stringify(filteredArray));
+                    const oneway = 
+                        couple[property]["them"].filter(value => 
+                            currcouple[property]["us"].includes(value));
+                    const otherway = 
+                        currcouple[property]["them"].filter(value => 
+                            couple[property]["us"].includes(value));
+
+                    console.log("oneway: " + JSON.stringify(oneway));
+                    console.log("otherway: " + JSON.stringify(otherway));
+
+                    if (oneway.length == 0 || otherway.length == 0) {
+                        skip = true;
+                        continue;
+                    }
 
                     score += filteredArray.length;
                     console.log("score: " + score);
                 }
-                if (score > bestmatchscore) {
+                if (!skip && score > bestmatchscore) {
                     bestmatchscore = score;
                     bestmatch = currcouple;
                 }
