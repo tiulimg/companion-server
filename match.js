@@ -27,7 +27,7 @@ var formParams = {
     "הערות":"notes",
 };
 
-formValues = {
+var formValues = {
     "צעיר - מעוניינים בליווי זוגי": "young",
     "ותיק - מעוניינים ללוות זוגות צעירים": "mature",
     "גבר ואישה (או אישה וגבר)": "straight",
@@ -35,6 +35,8 @@ formValues = {
     "זוג נשים": "lesbians",
     "א-בינארי": "nonbinary",
 }
+
+var gridUsText = "אלה אנחנו";
 
 function parsecouple(body) {
     var couple = {};
@@ -45,6 +47,26 @@ function parsecouple(body) {
             if (typeof couple[formParams[property]] === 'undefined' || couple[formParams[property]] == "") {
                 if (formValues.hasOwnProperty(body[property])) {
                     couple[formParams[property]] = formValues[body[property]];
+                }
+                else if (typeof(body[property] !== "string")) {
+                    couple[formParams[property]] = {
+                        "us": [],
+                        "them": [],
+                    };
+                    for (let iProp = 0; iProp < body[property]["rows"].length; iProp++) {
+                        const propTitle = body[property]["rows"][iProp];
+                        const propValues = body[property]["values"][iProp];
+                        if (propValues.length == 2) {
+                            couple[formParams[property]]["us"].push(propTitle);
+                            couple[formParams[property]]["them"].push(propTitle);
+                        }
+                        else if (propValues.includes(gridUsText)) {
+                            couple[formParams[property]]["us"].push(propTitle);
+                        }
+                        else {
+                            couple[formParams[property]]["them"].push(propTitle);
+                        }
+                    }
                 }
                 else {
                     couple[formParams[property]] = body[property];
