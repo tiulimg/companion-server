@@ -45,6 +45,8 @@ function parsecouple(body) {
     for (var property in formParams) {
         if (body.hasOwnProperty(property)) {
             if (typeof couple[formParams[property]] === 'undefined' || couple[formParams[property]] == "") {
+                console.log(`property: ${property} type: ${typeof(body[property])} value: ${body[property]}`);
+                
                 if (formValues.hasOwnProperty(body[property])) {
                     couple[formParams[property]] = formValues[body[property]];
                 }
