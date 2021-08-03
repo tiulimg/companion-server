@@ -120,12 +120,20 @@ function getbestmatch(res, couple) {
                 for (var property in currcouple) {
                     console.log(`property: ${property} currcouple: ${currcouple[property]}`);
 
-                    const oneway = 
-                        couple[property]["them"].filter(value => 
-                            currcouple[property]["us"].includes(value));
-                    const otherway = 
-                        currcouple[property]["them"].filter(value => 
-                            couple[property]["us"].includes(value));
+                    const oneway = ["success"]; 
+                    const otherway = ["success"]; 
+                    if (couple[property] && couple[property]["them"]) {
+                        oneway =
+                            couple[property]["them"].filter(value => 
+                                currcouple[property] && currcouple[property]["us"] && 
+                                currcouple[property]["us"].includes(value));
+                    }
+                    if (currcouple[property] && currcouple[property]["them"]) {
+                        otherway = 
+                            currcouple[property]["them"].filter(value => 
+                                couple[property] && couple[property]["us"] && 
+                                couple[property]["us"].includes(value));
+                    }
 
                     console.log("oneway: " + JSON.stringify(oneway));
                     console.log("otherway: " + JSON.stringify(otherway));

@@ -28,7 +28,6 @@ router.post("/api/couples", function(req, res) {
         console.log(`b4matches`);
         match.getbestmatch(res, couple)
         .then(bestmatches => {
-            console.log(`have matches ${bestmatches}`);
             if (bestmatches.youngcouple && bestmatches.maturecouple) {
                 console.log(`have young mature`);
                 youngcouple = bestmatches.youngcouple;
