@@ -122,6 +122,8 @@ function getbestmatch(res, couple) {
 
                     const oneway = ["success"]; 
                     const otherway = ["success"]; 
+                    const optionaloneway = []; 
+                    const optionalotherway = []; 
                     if (couple[property] && couple[property]["them"]) {
                         oneway =
                             couple[property]["them"].filter(value => 
@@ -134,16 +136,31 @@ function getbestmatch(res, couple) {
                                 couple[property] && couple[property]["us"] && 
                                 couple[property]["us"].includes(value));
                     }
+                    if (couple[property] && couple[property]["us"]) {
+                        optionaloneway =
+                            couple[property]["us"].filter(value => 
+                                currcouple[property] && currcouple[property]["us"] && 
+                                currcouple[property]["us"].includes(value));
+                    }
+                    if (currcouple[property] && currcouple[property]["us"]) {
+                        optionalotherway = 
+                            currcouple[property]["us"].filter(value => 
+                                couple[property] && couple[property]["us"] && 
+                                couple[property]["us"].includes(value));
+                    }
 
                     console.log("oneway: " + JSON.stringify(oneway));
                     console.log("otherway: " + JSON.stringify(otherway));
+                    console.log("optionaloneway: " + JSON.stringify(optionaloneway));
+                    console.log("optionalotherway: " + JSON.stringify(optionalotherway));
 
                     if (oneway.length == 0 || otherway.length == 0) {
                         skip = true;
                         continue;
                     }
 
-                    score += filteredArray.length;
+                    score += optionaloneway.length;
+                    score += optionalotherway.length;
                     console.log("score: " + score);
                 }
                 if (!skip && score > bestmatchscore) {
