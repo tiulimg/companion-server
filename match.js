@@ -41,7 +41,6 @@ var gridUsText = "אלה אנחנו";
 function parsecouple(body) {
     var couple = {};
 
-    console.log("body: " + JSON.stringify(body));
     for (var property in formParams) {
         if (body.hasOwnProperty(property)) {
             if (typeof couple[formParams[property]] === 'undefined' || couple[formParams[property]] == "") {
@@ -57,7 +56,8 @@ function parsecouple(body) {
                     };
                     for (let iProp = 0; iProp < body[property]["rows"].length; iProp++) {
                         const propTitle = body[property]["rows"][iProp];
-                        const propValues = body[property]["values"][iProp];
+                        const propValues = JSON.parse(body[property]["values"])[iProp];
+                        console.log(`propTitle: ${propTitle} propValues: ${JSON.stringify(propValues)}`);
                         if (propValues.length == 2) {
                             couple[formParams[property]]["us"].push(propTitle);
                             couple[formParams[property]]["them"].push(propTitle);
