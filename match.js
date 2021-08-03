@@ -72,6 +72,14 @@ function parsecouple(body) {
                             couple[formParams[property]]["them"].push(propTitle);
                         }
                     }
+                    if (body[property]["rows"].length > 2) {
+                        if (couple[formParams[property]]["us"].length == body[property]["rows"].length) {
+                            couple[formParams[property]]["us"] = [];
+                        }
+                        if (couple[formParams[property]]["them"].length == body[property]["rows"].length) {
+                            couple[formParams[property]]["them"] = [];
+                        }
+                    }
                 }
                 else {
                     couple[formParams[property]] = body[property];
