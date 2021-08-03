@@ -120,10 +120,10 @@ function getbestmatch(res, couple) {
                 for (var property in currcouple) {
                     console.log(`property: ${property} currcouple: ${currcouple[property]}`);
 
-                    const oneway = ["success"]; 
-                    const otherway = ["success"]; 
-                    const optionaloneway = []; 
-                    const optionalotherway = []; 
+                    var oneway = ["success"]; 
+                    var otherway = ["success"]; 
+                    var optionaloneway = []; 
+                    var optionalotherway = []; 
                     if (couple[property] && couple[property]["them"]) {
                         oneway =
                             couple[property]["them"].filter(value => 
