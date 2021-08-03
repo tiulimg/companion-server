@@ -50,7 +50,7 @@ function parsecouple(body) {
                 if (formValues.hasOwnProperty(body[property])) {
                     couple[formParams[property]] = formValues[body[property]];
                 }
-                else if (typeof(body[property] !== "string")) {
+                else if (typeof(body[property]) !== "string") {
                     couple[formParams[property]] = {
                         "us": [],
                         "them": [],
