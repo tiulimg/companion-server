@@ -58,7 +58,10 @@ function parsecouple(body) {
                         const propTitle = body[property]["rows"][iProp];
                         const propValues = JSON.parse(body[property]["values"])[iProp];
                         console.log(`propTitle: ${propTitle} propValues: ${JSON.stringify(propValues)}`);
-                        if (propValues.length == 2) {
+                        if (propValues == null) {
+                            continue;
+                        }
+                        else if (propValues.length == 2) {
                             couple[formParams[property]]["us"].push(propTitle);
                             couple[formParams[property]]["them"].push(propTitle);
                         }
