@@ -39,6 +39,7 @@ formValues = {
 function parsecouple(body) {
     var couple = {};
 
+    console.log("body: " + JSON.stringify(body));
     for (var property in formParams) {
         if (body.hasOwnProperty(property)) {
             if (typeof couple[formParams[property]] === 'undefined' || couple[formParams[property]] == "") {
