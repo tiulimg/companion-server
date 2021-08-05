@@ -124,13 +124,13 @@ function getbestmatch(res, couple) {
                     var otherway = ["success"]; 
                     var optionaloneway = []; 
                     var optionalotherway = []; 
-                    if (couple[property] && couple[property]["them"]) {
+                    if (couple[property] && couple[property]["them"] && couple[property]["them"].length > 0) {
                         oneway =
                             couple[property]["them"].filter(value => 
                                 currcouple[property] && currcouple[property]["us"] && 
                                 currcouple[property]["us"].includes(value));
                     }
-                    if (currcouple[property] && currcouple[property]["them"]) {
+                    if (currcouple[property] && currcouple[property]["them"] && currcouple[property]["them"].length > 0) {
                         otherway = 
                             currcouple[property]["them"].filter(value => 
                                 couple[property] && couple[property]["us"] && 
