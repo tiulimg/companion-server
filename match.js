@@ -165,10 +165,11 @@ function getbestmatch(res, couple) {
                 }
                 if (!skip && score > bestmatchscore) {
                     bestmatchscore = score;
-                    bestmatch = currcouple;
+                    bestmatch = couples[iCouple];
                     console.log(`bestmatch: ${bestmatch}`);
                 }
             }
+            console.log(`bestmatch2: ${bestmatch}`);
 
             bestmatches = {};
             if (bestmatch) {
