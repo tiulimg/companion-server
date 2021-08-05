@@ -156,7 +156,7 @@ function getbestmatch(res, couple) {
 
                     if (oneway.length == 0 || otherway.length == 0) {
                         skip = true;
-                        continue;
+                        break;
                     }
 
                     score += optionaloneway.length;
