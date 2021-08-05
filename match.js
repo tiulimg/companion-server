@@ -102,22 +102,24 @@ function getbestmatch(res, couple) {
         .then(couples => {
             console.log(`couples to match: ${JSON.stringify(couples)}`);
 
+            copycouple = JSON.parse(JSON.stringify(couple));
+
             bestmatch = null;
             bestmatchscore = -1;
-            delete couple.email;
-            delete couple.editlink;
-            delete couple.youngormature;
-            delete couple.name1;
-            delete couple.name2;
-            delete couple.gender;
-            delete couple.notes;
-            delete couple._id;
+            delete copycouple.email;
+            delete copycouple.editlink;
+            delete copycouple.youngormature;
+            delete copycouple.name1;
+            delete copycouple.name2;
+            delete copycouple.gender;
+            delete copycouple.notes;
+            delete copycouple._id;
 
             for (let iCouple = 0; iCouple < couples.length; iCouple++) {
                 var score = 0;
                 var currcouple = couples[iCouple];
                 var skip = false;
-                for (var property in couple) {
+                for (var property in copycouple) {
                     console.log(`property: ${property} currcouple: ${JSON.stringify(currcouple[property])} couple: ${JSON.stringify(couple[property])}`);
 
                     var oneway = ["no requirement"]; 
@@ -166,10 +168,8 @@ function getbestmatch(res, couple) {
                 if (!skip && score > bestmatchscore) {
                     bestmatchscore = score;
                     bestmatch = couples[iCouple];
-                    console.log(`bestmatch: ${bestmatch}`);
                 }
             }
-            console.log(`bestmatch2: ${bestmatch}`);
 
             bestmatches = {};
             if (bestmatch) {
