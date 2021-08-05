@@ -118,8 +118,8 @@ function getbestmatch(res, couple) {
                 const currcouple = couples[iCouple];
                 var skip = false;
                 for (var property in couple) {
-                    console.log(`property: ${property} currcouple: ${JSON.stringify(currcouple[property])} \
-                    couple: ${JSON.stringify(couple[property])}`);
+                    console.log(`property: ${property} currcouple: ${JSON.stringify(currcouple[property])} 
+couple: ${JSON.stringify(couple[property])}`);
 
                     var oneway = ["no requirement"]; 
                     var otherway = ["no requirement"]; 
@@ -164,6 +164,7 @@ function getbestmatch(res, couple) {
                     score += optionalotherway.length;
                     console.log("score: " + score);
                 }
+                console.log(skip, bestmatchscore);
                 if (!skip && score > bestmatchscore) {
                     bestmatchscore = score;
                     bestmatch = currcouple;
