@@ -117,8 +117,8 @@ function getbestmatch(res, couple) {
                 var score = 0;
                 const currcouple = couples[iCouple];
                 var skip = false;
-                for (var property in currcouple) {
-                    console.log(`property: ${property} currcouple: ${currcouple[property]}`);
+                for (var property in couple) {
+                    console.log(`property: ${property} currcouple: ${JSON.stringify(currcouple[property])}`);
 
                     var oneway = ["success"]; 
                     var otherway = ["success"]; 
