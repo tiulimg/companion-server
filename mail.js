@@ -17,7 +17,7 @@ function emailyoung(recipient, matureemail, youngname1, youngname2, maturename1,
     עדכנו אותנו אם הצלחתם ליצור חיבור טוב איתם ואם החיבור איתם תרם לכם. 
     
     מערכת Companion (מיזם התנדבותי חינמי)
-    https://www.facebook.com/couples-companion`;
+    https://www.facebook.com/beginning.companion`;
     var subject = "נמצאה התאמה לליווי זוגי בתחילת הקשר! 😎";
 
     var data = {
@@ -46,7 +46,7 @@ function emailmature(recipient, youngemail, youngname1, youngname2, maturename1,
     עדכנו אותנו אם הצלחתם ליצור חיבור טוב איתם ואם החיבור איתם תרם להם או לכם. 
     
     מערכת Companion (מיזם התנדבותי חינמי)
-    https://www.facebook.com/couples-companion`;
+    https://www.facebook.com/beginning.companion`;
     var subject = "נמצאה התאמה לליווי זוגי בתחילת הקשר! 😎";
 
     var data = {
@@ -74,7 +74,7 @@ function emailsystem(youngemail, matureemail, youngname1, youngname2, maturename
     נאחל להם המון הצלחה ושנים רבות של אהבה! 
     
     מערכת Companion (מיזם התנדבותי חינמי)
-    https://www.facebook.com/couples-companion`;
+    https://www.facebook.com/beginning.companion`;
     var subject = "נמצאה התאמה לליווי זוגי בתחילת הקשר! 😎";
 
     var data = {
