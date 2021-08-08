@@ -102,10 +102,9 @@ function getbestmatch(res, couple) {
         .then(matches => {
             console.log(`matches: ${JSON.stringify(matches)}`);
             pastmatches = {};
-            for (var pastmatch in matches)
-            {
+            matches.forEach(pastmatch => {
                 pastmatches[`${pastmatch.emailyoung}_-^-_${pastmatch.emailmature}`] = "Been matched"
-            }
+            });
             console.log(`pastmatches: ${JSON.stringify(pastmatches)}`);
 
             dbservices.getcouples(res, couple.youngormature, couple.gender)
