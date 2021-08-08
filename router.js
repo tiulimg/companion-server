@@ -191,7 +191,7 @@ router.get("/api/blacklist", function(req, res) {
 router.post("/api/blacklist", function(req, res) {
     var blacklist = req.body;
     if (blacklist.hasOwnProperty("email")) {
-        dbservices.insertmatch(res, blacklist)
+        dbservices.insertblacklist(res, blacklist)
         .then(() => {
             res.status(200).json("OK");
         })
