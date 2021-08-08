@@ -100,12 +100,10 @@ function getbestmatch(res, couple) {
         console.log(`enter getbestmatch`);
         dbservices.getmatches(res)
         .then(matches => {
-            console.log(`matches: ${JSON.stringify(matches)}`);
             pastmatches = {};
             matches.forEach(pastmatch => {
                 pastmatches[`${pastmatch.emailyoung}_-^-_${pastmatch.emailmature}`] = "Been matched"
             });
-            console.log(`pastmatches: ${JSON.stringify(pastmatches)}`);
 
             dbservices.getcouples(res, couple.youngormature, couple.gender)
             .then(couples => {
@@ -127,8 +125,6 @@ function getbestmatch(res, couple) {
                 for (let iCouple = 0; iCouple < couples.length; iCouple++) {
                     var score = 0;
                     var currcouple = couples[iCouple];
-                    console.log("test past match: " + pastmatches[`${couple.email}_-^-_${currcouple.email}`]);
-                    console.log("test past match2: " + pastmatches[`${currcouple.email}_-^-_${couple.email}`]);
                     if (pastmatches[`${couple.email}_-^-_${currcouple.email}`] ||
                         pastmatches[`${currcouple.email}_-^-_${couple.email}`]) {
                         console.log(`${couple.email} already matched with ${currcouple.email} in the past, skipping...`);
