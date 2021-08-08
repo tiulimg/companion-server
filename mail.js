@@ -20,7 +20,7 @@ function emailyoung(recipient, matureemail, youngname1, youngname2, maturename1,
     var subject = "נמצאה התאמה לליווי זוגי בתחילת הקשר! 😎";
 
     var data = {
-        from: 'Companion - ליווי זוגי בתחילת הקשר <tiulimg@gmail.com>',
+        from: 'Companion - ליווי זוגי בתחילת הקשר <beginning.companion@gmail.com>',
         to: recipient,
         subject: subject,
         text: mailbody,
@@ -49,7 +49,7 @@ function emailmature(recipient, youngemail, youngname1, youngname2, maturename1,
     var subject = "נמצאה התאמה לליווי זוגי בתחילת הקשר! 😎";
 
     var data = {
-        from: 'Companion - ליווי זוגי בתחילת הקשר <tiulimg@gmail.com>',
+        from: 'Companion - ליווי זוגי בתחילת הקשר <beginning.companion@gmail.com>',
         to: recipient,
         subject: subject,
         text: mailbody,

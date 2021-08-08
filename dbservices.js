@@ -9,11 +9,21 @@ module.exports = {
     insertcouple: insertcouple,
     deleteonecouple: deleteonecouple,
     deleteallcouples: deleteallcouples,
+    getmatches: getmatches,
+    insertmatch: insertmatch,
+    deleteonematch: deleteonematch,
+    deleteallmatches: deleteallmatches,
+    getblacklist: getblacklist,
+    insertblacklist: insertblacklist,
+    deleteoneblacklist: deleteoneblacklist,
+    deleteallblacklist: deleteallblacklist,
 }
 
 var db;
 
 var COUPLES_COLLECTION = "couples";
+var MATCHES_COLLECTION = "matches";
+var BLACKLIST_COLLECTION = "blacklist";
 
 function initialize(app) {
     return new Promise((resolve, reject) => {
@@ -94,6 +104,116 @@ function deleteallcouples(res) {
         db.collection(COUPLES_COLLECTION).deleteMany({}, function(err, docs) {
             if (err) {
                 logservices.handleError(res, err.message, "Failed to delete all couples.");
+            } else {
+                return resolve();
+            }
+        });
+    });
+}
+
+function getmatches(res) {
+    return new Promise((resolve, reject) => {
+        db.collection(BLACKLIST_COLLECTION).find({}).toArray(function(err, docs) {
+            if (err) {
+                logservices.handleError(res, err.message, "Failed to get all matches.");
+            } else {
+                return resolve(docs);
+            }
+        });
+    });
+}
+
+function insertmatch(res, match) {
+    return new Promise((resolve, reject) => {
+        deleteonematch(res, match.emailyoung, match.emailmature)
+        .then(() => {
+            db.collection(MATCHES_COLLECTION).insertOne(match, function(err, doc) {
+                if (err) {
+                    logservices.handleError(res, err.message, "Failed to create or update match.");
+                }
+                else {
+                    return resolve(doc);
+                }
+            });
+        })
+        .catch(rejection => {
+            logservices.logRejection(rejection);
+        });
+    });
+}
+
+function deleteonematch(res, emailyoung, emailmature) {
+    return new Promise((resolve, reject) => {
+        db.collection(MATCHES_COLLECTION).deleteOne(
+            { emailyoung: emailyoung.toLowerCase(), emailmature: emailmature.toLowerCase() }, function(err, doc) {
+            if (err) {
+                logservices.handleError(res, err.message, "Failed to delete match");
+            }
+            return resolve();
+        });
+    });
+}
+
+function deleteallmatches(res) {
+    return new Promise((resolve, reject) => {
+        db.collection(MATCHES_COLLECTION).deleteMany({}, function(err, docs) {
+            if (err) {
+                logservices.handleError(res, err.message, "Failed to delete all matches.");
+            } else {
+                return resolve();
+            }
+        });
+    });
+}
+
+function getblacklist(res, email) {
+    return new Promise((resolve, reject) => {
+        db.collection(BLACKLIST_COLLECTION).find({email: email.toLowerCase()}).toArray(function(err, docs) {
+            if (err) {
+                logservices.handleError(res, err.message, "Failed to get blacklist.");
+            } else {
+                return resolve(docs);
+            }
+        });
+    });
+}
+
+function insertblacklist(res, blacklist) {
+    return new Promise((resolve, reject) => {
+        deleteonecouple(res, blacklist.email)
+        .then(() => {
+            db.collection(BLACKLIST_COLLECTION).insertOne(blacklist, function(err, doc) {
+                if (err) {
+                    logservices.handleError(res, err.message, "Failed to create or update blacklist.");
+                }
+                else {
+                    return resolve(doc);
+                }
+            });
+        })
+        .catch(rejection => {
+            logservices.logRejection(rejection);
+        });
+    });
+}
+
+function deleteoneblacklist(res, email) {
+    return new Promise((resolve, reject) => {
+        db.collection(BLACKLIST_COLLECTION).deleteOne(
+            { email: email.toLowerCase() }, function(err, doc) {
+            if (err) {
+                logservices.handleError(res, err.message, "Failed to delete blacklist");
+            }
+            return resolve();
+        });
+    });
+}
+
+function deleteallblacklist(res) {
+    return new Promise((resolve, reject) => {
+        db.collection(BLACKLIST_COLLECTION).deleteMany({}, function(err, docs) {
+            if (err) {
+                logservices.handleError(res, err.message, "Failed to delete all blacklist.");
             } else {
                 return resolve();
             }
