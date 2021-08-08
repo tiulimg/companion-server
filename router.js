@@ -25,7 +25,8 @@ router.post("/api/couples", function(req, res) {
     var couple = match.parsecouple(req.body);
     dbservices.getblacklist(res, couple.email)
     .then(blacklist => {
-        if (blacklist) {
+        if (blacklist && blacklist.length > 0) {
+            console.log(`This couple is blacklisted ${couple.email}`);
             res.status(200).json(`This couple is blacklisted ${couple.email}`);
         }
         else {
