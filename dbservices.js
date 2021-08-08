@@ -180,7 +180,7 @@ function getblacklist(res, email) {
 
 function insertblacklist(res, blacklist) {
     return new Promise((resolve, reject) => {
-        deleteonecouple(res, blacklist.email)
+        deleteoneblacklist(res, blacklist.email)
         .then(() => {
             db.collection(BLACKLIST_COLLECTION).insertOne(blacklist, function(err, doc) {
                 if (err) {
