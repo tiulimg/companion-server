@@ -113,7 +113,7 @@ function deleteallcouples(res) {
 
 function getmatches(res) {
     return new Promise((resolve, reject) => {
-        db.collection(BLACKLIST_COLLECTION).find({}).toArray(function(err, docs) {
+        db.collection(MATCHES_COLLECTION).find({}).toArray(function(err, docs) {
             if (err) {
                 logservices.handleError(res, err.message, "Failed to get all matches.");
             } else {
