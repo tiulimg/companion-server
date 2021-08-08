@@ -1,6 +1,7 @@
 module.exports = {
     emailyoung: emailyoung,
     emailmature: emailmature,
+    emailsystem: emailsystem,
 }
 
 function emailyoung(recipient, matureemail, youngname1, youngname2, maturename1, maturename2) {
@@ -51,6 +52,34 @@ function emailmature(recipient, youngemail, youngname1, youngname2, maturename1,
     var data = {
         from: 'Companion - ליווי זוגי בתחילת הקשר <beginning.companion@gmail.com>',
         to: recipient,
+        subject: subject,
+        text: mailbody,
+    };
+
+    sgMail
+    .send(data)
+    .catch((error) => {
+        console.error(error)
+    })
+}
+
+function emailsystem(youngemail, matureemail, youngname1, youngname2, maturename1, maturename2) {
+    const sgMail = require('@sendgrid/mail')
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
+    var mailbody = `איזה יופי! 🙂
+    
+    נמצאה התאמה חדשה בין ${youngname1} ו-${youngname2} (${youngemail}) לבין ${maturename1} ו-${maturename2} (${matureemail}) 👍
+
+    נאחל להם המון הצלחה ושנים רבות של אהבה! 
+    
+    מערכת Companion (מיזם התנדבותי חינמי)
+    https://www.facebook.com/couples-companion`;
+    var subject = "נמצאה התאמה לליווי זוגי בתחילת הקשר! 😎";
+
+    var data = {
+        from: 'Companion - ליווי זוגי בתחילת הקשר <beginning.companion@gmail.com>',
+        to: "beginning.companion@gmail.com",
         subject: subject,
         text: mailbody,
     };
